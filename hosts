@@ -1,0 +1,7 @@
+[servers]
+#alpha.example.org
+#beta.example.org
+#192.168.174.136 ansible_user=gns3
+192.168.174.137 ansible_user=gns3
+192.168.174.138 ansible_user=gns3
+

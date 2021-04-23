@@ -1,0 +1,57 @@
+---
+- hosts: all
+  become: true
+  vars:
+    ansible_become_pass: gns3
+
+  tasks:
+  - name: install vfstpd package
+    become: yes
+    apt: name=vsftpd state=latest update_cache=yes
+
+  - name: start vfstpd
+    shell: "vfstpd &"
+
+
+  - name: install git
+    become: yes
+    apt: name=git state=present update_cache=yes
+
+  - name: start git
+    shell: "git &"
+
+  - name: install nmap
+    become: yes
+    apt: name=nmap state=present update_cache=yes
+
+  - name: start git
+    shell: "nmap &"
+
+
+  - name: MongoDB - Import public key
+    apt_key:
+      keyserver: hkp://keyserver.ubuntu.com:80
+      id: EA312927
+
+  - name: MongoDB - Add repository
+    apt_repository:
+       filename: 'etc/apt/sources.list.d/mongodb-org-3.2.list'
+       repo: 'deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multivers'
+       state: present
+       update_cache: yes
+
+  - name: install python3-pip
+    become: yes
+    apt: name=python3-pip state=present update_cache=yes
+
+
+
+
+#  - name: Install MongoDB
+#    become: yes   
+#    apt: name= mongodb-org state=present update_cache=yes
+
+#  - name: install Mongo
+#    become: yes
+#    apt: name=mongodb-org state=present update_cache=yes
+

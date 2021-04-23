@@ -1,0 +1,33 @@
+---
+- hosts: all
+  become: true
+  vars:
+    ansible_become_pass: gns3
+
+  tasks:
+  - name: install vfstpd package
+    become: yes
+    apt: name=vsftpd state=latest update_cache=yes
+
+  - name: start vfstpd
+    shell: "vfstpd &"
+
+
+  - name: install git
+    become: yes
+    apt: name=git state=present update_cache=yes
+
+  - name: start git
+    shell: "git &"
+
+  - name: install nmap
+    become: yes
+    apt: name=nmap state=present update_cache=yes
+
+  - name: start git
+    shell: "nmap &"
+
+#  - name: start and Enable vsftpd service
+#    systemctl: name:vsftpd state:restarted enabled=yes
+
+
